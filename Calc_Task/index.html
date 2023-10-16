@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>GUVI Calculator</title>
+</head>
+<style>
+      #calculator {
+            width: 220px;
+            margin: 0 auto ;
+            text-align: center;
+            border: 1px solid black;
+            
+            
+        }
+
+        .button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #display {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            border: 1px solid black;
+        }
+       body{
+        background-image: url(bg.jpeg);
+        background-size: cover;
+        }
+        
+</style>
+<body>
+    
+
+    <h1 style="text-align: center;">Basic Calculator</h1>
+    <div id="calculator">
+        <div id="display">0</div>
+    </div>
+
+    <script>
+        const calculator = document.getElementById('calculator');
+        const display = document.getElementById('display');
+
+        function createButton(text, className, clickHandler) {
+            const button = document.createElement('button');
+            button.innerText = text;
+            button.className = className;
+            button.addEventListener('click', clickHandler);
+            calculator.appendChild(button);
+        }
+
+        function appendToDisplay(text) {
+            if (display.textContent === '0') {
+                display.textContent = text;
+            } else {
+                display.textContent += text;
+            }
+        }
+
+        function clearDisplay() {
+            display.textContent = '0';
+        }
+
+        function calculateResult() {
+            try {
+                display.textContent = eval(display.textContent);
+            } catch (error) {
+                display.textContent = 'Error';
+            }
+        }
+        document.addEventListener('keydown',function(event)
+        {
+            let Keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', '%', '(', ')'];
+            if(!Keys.includes(event.key))
+            {
+                alert('Only numbers and operators are allowed!');
+                event.preventDefault();
+            }
+        }
+        );
+        createButton('C', 'button', clearDisplay);
+        createButton('7', 'button', () => appendToDisplay('7'));
+        createButton('8', 'button', () => appendToDisplay('8'));
+        createButton('9', 'button', () => appendToDisplay('9'));
+        createButton('4', 'button', () => appendToDisplay('4'));
+        createButton('5', 'button', () => appendToDisplay('5'));
+        createButton('6', 'button', () => appendToDisplay('6'));
+        createButton('1', 'button', () => appendToDisplay('1'));
+        createButton('2', 'button', () => appendToDisplay('2'));
+        createButton('3', 'button', () => appendToDisplay('3'));
+        createButton('+', 'button', () => appendToDisplay('+'));
+        createButton('-', 'button', () => appendToDisplay('-'));
+        createButton('0', 'button', () => appendToDisplay('0'));
+        createButton('.', 'button', () => appendToDisplay('.'));
+        createButton('=', 'button', calculateResult);
+        createButton('/', 'button', () => appendToDisplay('/'));
+        createButton('%', 'button', () => appendToDisplay('%'));
+        createButton('*', 'button', () => appendToDisplay('*'));
+        
+        
+    </script>
+
+    
+</body>
+</html>
